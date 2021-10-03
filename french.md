@@ -12,7 +12,7 @@ Traductions:
 
 [ภาษาไทย](thai.md) (by [kongvut sangkla](https://github.com/kongvut))
 
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
+[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/ohmydevops))
 
 [Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
 
@@ -26,7 +26,7 @@ Traductions:
 
 [Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
 
-[Polski](https://github.com/maciejjeziorski/laravel-best-practices-pl) (by [Maciej Jeziorski](https://github.com/maciejjeziorski))
+[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
 
 [Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
 
@@ -35,6 +35,8 @@ Traductions:
 [Italiana](italian.md) (by [Sujal Patel](https://github.com/sujalpatel2209))
 
 [العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
+
+[اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
 Ce n'est pas une adaptation Laravel des principes SOLID, des modèles, etc. Vous trouverez ici les meilleures pratiques qui sont généralement ignorées dans les projets réels de Laravel.
 
@@ -446,7 +448,7 @@ Tâche | Outils standard | Outils tiers
 ------------ | ------------- | -------------
 Autorisation | Policies | Entrust, Sentinel et d'autres packages
 Compiler des assets | Laravel Mix | Grunt, Gulp, packages tiers
-Environnement de développement | Homestead | Docker
+Environnement de développement | Laravel Sail, Homestead | Docker
 Déploiement | Laravel Forge | Deployer et d'autre solutions
 Tests unitaires | PHPUnit, Mockery | Phpspec
 Test du navigateur | Laravel Dusk | Codeception
@@ -455,7 +457,7 @@ Templates | Blade | Twig
 Travailler avec des données | Laravel collections | Arrays
 Validation du formulaire | Request classes | 3rd party packages, validation dans le contrôleur
 Authentification | Built-in | 3rd party packages, votre propre solution
-API D'authentification | Laravel Passport | 3rd party JWT et OAuth packages
+API D'authentification | Laravel Passport, Laravel Sanctum | 3rd party JWT et OAuth packages
 Création d'API | Built-in | Dingo API and similar packages
 Travailler avec une structure de base de données | Migrations | Travailler directement avec la structure de la base de données
 Localisation | Built-in | 3rd party packages

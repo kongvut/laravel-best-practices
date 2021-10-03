@@ -16,7 +16,7 @@
 
 [漢語](chinese.md) (by [xiaoyi](https://github.com/Shiloh520))
 
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
+[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/ohmydevops))
 
 [Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
 
@@ -26,7 +26,7 @@
 
 [Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
 
-[Polski](https://github.com/maciejjeziorski/laravel-best-practices-pl) (by [Maciej Jeziorski](https://github.com/maciejjeziorski))
+[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
 
 [Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
 
@@ -37,6 +37,8 @@
 [Italiana](italian.md) (by [Sujal Patel](https://github.com/sujalpatel2209))
 
 [العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
+
+[اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
 เอกสารนี้ไม่ใช่การดัดแปลงหลักการ SOLID หรือรูปแบบและอื่น ๆ ของ Laravel โดยบทความนี้คุณจะพบแนวทางปฏิบัติในการ Coding ที่ดีที่สุด ซึ่งหลายคนมักจะละเลยในงานโปรเจค Laravel จริงของคุณ
 
@@ -452,7 +454,7 @@ return back()->with('message', __('app.article_added'));
 ------------ | ------------- | -------------
 Authorization | Policies | Entrust, Sentinel and other packages
 Compiling assets | Laravel Mix | Grunt, Gulp, 3rd party packages
-Development Environment | Homestead | Docker
+Development Environment | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer and other solutions
 Unit testing | PHPUnit, Mockery | Phpspec
 Browser testing | Laravel Dusk | Codeception
@@ -461,7 +463,7 @@ Templates | Blade | Twig
 Working with data | Laravel collections | Arrays
 Form validation | Request classes | 3rd party packages, validation in controller
 Authentication | Built-in | 3rd party packages, your own solution
-API authentication | Laravel Passport | 3rd party JWT and OAuth packages
+API authentication | Laravel Passport, Laravel Sanctum | 3rd party JWT and OAuth packages
 Creating API | Built-in | Dingo API and similar packages
 Working with DB structure | Migrations | Working with DB structure directly
 Localization | Built-in | 3rd party packages

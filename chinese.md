@@ -10,7 +10,7 @@
 
 [Русский](russian.md)
 
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
+[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/ohmydevops))
 
 [Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
 
@@ -20,7 +20,7 @@
 
 [Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
 
-[Polski](https://github.com/maciejjeziorski/laravel-best-practices-pl) (by [Maciej Jeziorski](https://github.com/maciejjeziorski))
+[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
 
 [Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
 
@@ -29,6 +29,8 @@
 [Italiana](italian.md) (by [Sujal Patel](https://github.com/sujalpatel2209))
 
 [العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
+
+[اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
 这并非laravel官方强制要求的规范，而是我们在日常开发过程中遇到的一些容易忽视的优秀实现方式。
 
@@ -443,7 +445,7 @@ return back()->with('message', __('app.article_added'));
 ------------ | ------------- | -------------
 权限 | Policies | Entrust, Sentinel 或者其他扩展包
 资源编译工具| Laravel Mix | Grunt, Gulp, 或者其他第三方包
-开发环境| Homestead | Docker
+开发环境| Laravel Sail, Homestead | Docker
 部署 | Laravel Forge | Deployer 或者其他解决方案
 自动化测试 | PHPUnit, Mockery | Phpspec
 页面预览测试 | Laravel Dusk | Codeception
@@ -452,7 +454,7 @@ DB操纵 | Eloquent | SQL, Doctrine
 数据操纵 | Laravel集合 | 数组
 表单验证| Request classes | 他第三方包,甚至在控制器中做验证
 权限 | Built-in | 他第三方包或者你自己解决
-API身份验证 | Laravel Passport | 第三方的JWT或者 OAuth 扩展包
+API身份验证 | Laravel Passport, Laravel Sanctum | 第三方的JWT或者 OAuth 扩展包
 创建 API | Built-in | Dingo API 或者类似的扩展包
 创建数据库结构 | Migrations | 直接用 DB 语句创建
 本土化 | Built-in |第三方包

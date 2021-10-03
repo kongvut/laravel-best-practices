@@ -14,7 +14,7 @@
 
 [漢語](chinese.md) (by [xiaoyi](https://github.com/Shiloh520))
 
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
+[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/ohmydevops))
 
 [Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
 
@@ -24,7 +24,7 @@
 
 [Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
 
-[Polski](https://github.com/maciejjeziorski/laravel-best-practices-pl) (by [Maciej Jeziorski](https://github.com/maciejjeziorski))
+[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
 
 [Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
 
@@ -33,6 +33,8 @@
 [Italiana](italian.md) (by [Sujal Patel](https://github.com/sujalpatel2209))
 
 [العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
+
+[اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
 Bu metin Laravel için SOLID prensipleri, patternler vb. şeylerin uygulaması değildir. Burada, Laravel projelerinde 
 geliştiriciler tarafından dikkate alınmayan iyi ve kötü pratiklerin karşılaştırmalarını bulacaksınız.
@@ -455,7 +457,7 @@ Yapılacak | Standart araç | 3rd party araçlar
 ------------ | ------------- | -------------
 Authorization (Yetkilendirme) | Policies | Entrust, Sentinel vb.
 Compiling assets (CSS ve JS Derleme) | Laravel Mix | Grunt, Gulp, 3rd party paketler
-Geliştirme Ortamı | Homestead | Docker
+Geliştirme Ortamı | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer and other solutions
 Unit testing | PHPUnit, Mockery | Phpspec
 Browser testing | Laravel Dusk | Codeception
@@ -464,7 +466,7 @@ Template | Blade | Twig
 Veri işleme | Laravel collections | Arrays
 Form doğrulama | Request classları | 3rd party paketler, controllerda doğrulama
 Authentication (Doğrulama) | Dahili | 3rd party paketler ya da kendi çözümünüz
-API authentication (Doğrulama) | Laravel Passport | 3rd party JWT and OAuth packetleri
+API authentication (Doğrulama) | Laravel Passport, Laravel Sanctum | 3rd party JWT and OAuth packetleri
 API Oluşturma | Dahili | Dingo API vb.
 DB Yapısı | Migrations | Doğrudan DB yönetimi
 Lokalizasyon (Yerelleştirme) | Dahili | 3rd party paketler

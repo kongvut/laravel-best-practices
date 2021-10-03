@@ -4,21 +4,21 @@ Translations:
 
 [Nederlands](https://github.com/Protoqol/Beste-Laravel-Praktijken) (by [Protoqol](https://github.com/Protoqol))
 
-[Indonesia](indonesia.md) (by [P0rguy](https://github.com/p0rguy))
+[Indonesia](indonesia.md) (by [P0rguy](https://github.com/p0rguy), [Doni Ahmad](https://github.com/donyahmd))
 
 [한국어](https://github.com/xotrs/laravel-best-practices) (by [cherrypick](https://github.com/xotrs))
 
 [日本語](japanese.md) (by [2bo](https://github.com/2bo))
 
-[漢語](chinese.md) (by [xiaoyi](https://github.com/Shiloh520))
+[简体中文](chinese.md) (by [xiaoyi](https://github.com/Shiloh520))
 
-[中文維基百科](traditional-chinese.md) (by [woeichern](https://github.com/woeichern))
+[繁體中文](traditional-chinese.md) (by [woeichern](https://github.com/woeichern))
 
 [ภาษาไทย](thai.md) (by [kongvut sangkla](https://github.com/kongvut))
 
 [বাংলা](bangla.md) (by [Anowar Hossain](https://github.com/AnowarCST))
 
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
+[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/ohmydevops))
 
 [Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
 
@@ -32,7 +32,7 @@ Translations:
 
 [Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
 
-[Polski](https://github.com/maciejjeziorski/laravel-best-practices-pl) (by [Maciej Jeziorski](https://github.com/maciejjeziorski))
+[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
 
 [Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
 
@@ -43,6 +43,8 @@ Translations:
 [Azərbaycanca](https://github.com/Maharramoff/laravel-best-practices-az) (by [Maharramoff](https://github.com/Maharramoff))
 
 [العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
+
+[اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
 It's not a Laravel adaptation of SOLID principles, patterns etc. Here you'll find the best practices which are usually ignored in real life Laravel projects.
 
@@ -454,7 +456,7 @@ Task | Standard tools | 3rd party tools
 ------------ | ------------- | -------------
 Authorization | Policies | Entrust, Sentinel and other packages
 Compiling assets | Laravel Mix | Grunt, Gulp, 3rd party packages
-Development Environment | Homestead | Docker
+Development Environment | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer and other solutions
 Unit testing | PHPUnit, Mockery | Phpspec
 Browser testing | Laravel Dusk | Codeception
@@ -463,7 +465,7 @@ Templates | Blade | Twig
 Working with data | Laravel collections | Arrays
 Form validation | Request classes | 3rd party packages, validation in controller
 Authentication | Built-in | 3rd party packages, your own solution
-API authentication | Laravel Passport | 3rd party JWT and OAuth packages
+API authentication | Laravel Passport, Laravel Sanctum | 3rd party JWT and OAuth packages
 Creating API | Built-in | Dingo API and similar packages
 Working with DB structure | Migrations | Working with DB structure directly
 Localization | Built-in | 3rd party packages
@@ -534,7 +536,7 @@ Common syntax | Shorter and more readable syntax
 `Session::put('cart', $data)` | `session(['cart' => $data])`
 `$request->input('name'), Request::get('name')` | `$request->name, request('name')`
 `return Redirect::back()` | `return back()`
-`is_null($object->relation) ? null : $object->relation->id` | `optional($object->relation)->id`
+`is_null($object->relation) ? null : $object->relation->id` | `optional($object->relation)->id` (in PHP 8: `$object->relation?->id`)
 `return view('index')->with('title', $title)->with('client', $client)` | `return view('index', compact('title', 'client'))`
 `$request->has('value') ? $request->value : 'default';` | `$request->get('value', 'default')`
 `Carbon::now(), Carbon::today()` | `now(), today()`

@@ -10,7 +10,7 @@
 
 [Русский](russian.md)
 
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
+[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/ohmydevops))
 
 [Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
 
@@ -20,7 +20,7 @@
 
 [Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
 
-[Polski](https://github.com/maciejjeziorski/laravel-best-practices-pl) (by [Maciej Jeziorski](https://github.com/maciejjeziorski))
+[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
 
 [Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
 
@@ -442,7 +442,7 @@ return back()->with('message', __('app.article_added'));
 ------------ | ------------- | -------------
 認可 | Policies | Entrust, Sentinel または他のパッケージ
 アセットコンパイル | Laravel Mix | Grunt, Gulp, サードパーティ製パッケージ
-開発環境 | Homestead | Docker
+開発環境 | Laravel Sail, Homestead | Docker
 デプロイ | Laravel Forge | Deployer またはその他ソリューション
 単体テスト| PHPUnit, Mockery | Phpspec
 ブラウザテスト | Laravel Dusk | Codeception
@@ -451,7 +451,7 @@ DB | Eloquent | SQL, Doctrine
 データの取り扱い | Laravel collections | Arrays
 フォームバリデーション | Request classes | サードパーティ製パッケージ、コントローラ内でバリデーション
 認証 | 標準組み込み | サードパーティ製パッケージ、独自実装
-API 認証 | Laravel Passport | サードパーティ製の JWT や OAuth パッケージ
+API 認証 | Laravel Passport, Laravel Sanctum | サードパーティ製の JWT や OAuth パッケージ
 API作成 | 標準組み込み | Dingo API や類似パッケージ
 DB構造の取り扱い | Migrations | 直接DB構造を扱う
 ローカライゼーション | 標準組み込み | サードパーティ製パッケージ

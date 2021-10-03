@@ -416,7 +416,7 @@ return back()->with('message', __('app.article_added'));
 ------------ | ------------- | -------------
 Авторизація | Policies | Entrust, Sentinel and other packages
 Компіляція засобів | Laravel Mix | Grunt, Gulp, 3rd party packages
-Середовище розробки | Homestead | Docker
+Середовище розробки | Laravel Sail, Homestead | Docker
 Розгортання застосунків | Laravel Forge | Deployer and other solutions
 Unit тестування | PHPUnit, Mockery | Phpspec
 Тестування браузера | Laravel Dusk | Codeception
@@ -425,7 +425,7 @@ Unit тестування | PHPUnit, Mockery | Phpspec
 Робота з даними | Laravel collections | Arrays
 Перевірка даних форми | Request classes | 3rd party packages, validation in controller
 Автентифікація | Built-in | 3rd party packages, your own solution
-API автентифікація | Laravel Passport | 3rd party JWT and OAuth packages
+API автентифікація | Laravel Passport, Laravel Sanctum | 3rd party JWT and OAuth packages
 Створення API | Built-in | Dingo API and similar packages
 Робота зі структурою БД | Migrations | Working with DB structure directly
 Локалізація | Built-in | 3rd party packages
