@@ -1,5 +1,7 @@
 ![Laravel best practices](/images/logo-arabic.png?raw=true)
 
+You might also want to check out the [real-world Laravel example application](https://github.com/alexeymezenin/laravel-realworld-example-app)
+
 ## <p dir="rtl">الترجمات</p>
 
 [Nederlands](https://github.com/Protoqol/Beste-Laravel-Praktijken) (by [Protoqol](https://github.com/Protoqol))
@@ -42,8 +44,7 @@
 
 [اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
-<p dir='rtl' align='right'>هذا المحتوى لا يصنف بصفته مبادئ SOLID للارافيل أو أنماط التصميم، إلخ... هنا ستجد أفضل الممارسات التي يتم تجاهلها عادةً في مشاريع لارافيل الفعلية.</p>
- 
+[![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ## <p dir="rtl">الفهرس</p>
 

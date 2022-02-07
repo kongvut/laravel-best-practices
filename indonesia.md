@@ -1,7 +1,7 @@
 
 ![Laravel best practices](/images/logo-english.png?raw=true)
 
-Ini bukan adaptasi Laravel dari prinsip SOLID, *pattern*, dll. Di sini Anda akan menemukan praktik terbaik yang biasanya diabaikan dalam proyek Laravel di kehidupan nyata.
+You might also want to check out the [real-world Laravel example application](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ## Konten
 
@@ -40,6 +40,8 @@ Ini bukan adaptasi Laravel dari prinsip SOLID, *pattern*, dll. Di sini Anda akan
 [Simpan tanggal dalam format standar. Gunakan *accessors* dan *mutators* untuk mengubah format tanggal](#simpan-tanggal-dalam-format-standar-gunakan-accessors-dan-mutators-untuk-mengubah-format-tanggal)
 
 [Praktik bagus lainnya](#praktik-bagus-lainnya)
+
+[![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ### **Prinsip *single responsibility***
 

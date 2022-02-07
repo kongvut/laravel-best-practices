@@ -1,5 +1,7 @@
 ![Laravel ベストプラクティス](/images/logo-japanese.png?raw=true)
 
+You might also want to check out the [real-world Laravel example application](https://github.com/alexeymezenin/laravel-realworld-example-app)
+
 翻訳:
 
 [Nederlands](https://github.com/Protoqol/Beste-Laravel-Praktijken) (by [Protoqol](https://github.com/Protoqol))
@@ -30,32 +32,31 @@
 
 [العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
 
-これはSOLID原則やパターンなどをLavavelに適用させたものではありません。
-ここでは、実際のLaravelプロジェクトでは通常無視されるベストプラクティスを見つけることができます。
+[![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ## コンテンツ
 
 [単一責任の原則](#単一責任の原則)
 
-[ファットモデル, スキニーコントローラ](#ファットモデル、スキニーコントローラ)
+[ファットモデル、スキニーコントローラ](#ファットモデルスキニーコントローラ)
 
 [バリデーション](#バリデーション)
 
 [ビジネスロジックはサービスクラスの中に書く](#ビジネスロジックはサービスクラスの中に書く)
 
-[繰り返し書かない (DRY)](#繰り返し書かない-(DRY))
+[繰り返し書かない (DRY)](#繰り返し書かない-dry)
 
-[クエリビルダや生のSQLクエリよりもEloquentを優先して使い、配列よりもコレクションを優先する](#クエリビルダや生のSQLクエリよりもEloquentを優先して使い、配列よりもコレクションを優先する)
+[クエリビルダや生のSQLクエリよりもEloquentを優先して使い、配列よりもコレクションを優先する](#クエリビルダや生のsqlクエリよりもeloquentを優先して使い配列よりもコレクションを優先する)
 
 [マスアサインメント](#マスアサインメント)
 
-[Bladeテンプレート内でクエリを実行しない。Eager Lodingを使う(N + 1問題)](#Bladeテンプレート内でクエリを実行しない。Eager-Lodingを使う(N-+-1問題))
+[Bladeテンプレート内でクエリを実行しない。Eager Lodingを使う(N + 1問題)](#bladeテンプレート内でクエリを実行しないeager-lodingを使うn--1問題)
 
-[コメントを書く。ただしコメントよりも説明的なメソッド名と変数名を付けるほうが良い](#コメントを書く。ただしコメントよりも説明的なメソッド名と変数名を付けるほうが良い)
+[コメントを書く。ただしコメントよりも説明的なメソッド名と変数名を付けるほうが良い](#コメントを書くただしコメントよりも説明的なメソッド名と変数名を付けるほうが良い)
 
-[JSとCSSをBladeテンプレートの中に入れない、PHPクラスの中にHTMLを入れない](#JSとCSSをBladeテンプレートの中に入れない、PHPクラスの中にHTMLを入れない)
+[JSとCSSをBladeテンプレートの中に入れない、PHPクラスの中にHTMLを入れない](#jsとcssをbladeテンプレートの中に入れないphpクラスの中にhtmlを入れない)
 
-[コード内の文字列の代わりにconfigファイルとlanguageのファイル、定数を使う](#コード内の文字列の代わりにconfigファイルとlanguageのファイル、定数を使う)
+[コード内の文字列の代わりにconfigファイルとlanguageのファイル、定数を使う](#コード内の文字列の代わりにconfigファイルとlanguageのファイル定数を使う)
 
 [コミュニティに受け入れられた標準のLaravelツールを使う](#コミュニティに受け入れられた標準のLaravelツールを使う)
 
@@ -65,9 +66,9 @@
 
 [newの代わりにIoCコンテナもしくはファサードを使う](#newの代わりにIoCコンテナもしくはファサードを使う)
 
-[`.env`ファイルのデータを直接参照しない](#`.env`ファイルのデータを直接参照しない)
+[`.env`ファイルのデータを直接参照しない](#envファイルのデータを直接参照しない)
 
-[日付を標準フォーマットで保存する。アクセサとミューテータを使って日付フォーマットを変更する](#日付を標準フォーマットで保存する。アクセサとミューテータを使って日付フォーマットを変更する)
+[日付を標準フォーマットで保存する。アクセサとミューテータを使って日付フォーマットを変更する](#日付を標準フォーマットで保存するアクセサとミューテータを使って日付フォーマットを変更する)
 
 [その他 グッドプラクティス](#その他-グッドプラクティス)
 

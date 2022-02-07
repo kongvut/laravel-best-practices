@@ -1,5 +1,7 @@
 ![Laravel best practices](/images/logo-spanish.png?raw=true)
 
+You might also want to check out the [real-world Laravel example application](https://github.com/alexeymezenin/laravel-realworld-example-app)
+
 Traducciones:
 
 [Nederlands](https://github.com/Protoqol/Beste-Laravel-Praktijken) (por [Protoqol](https://github.com/Protoqol))
@@ -46,7 +48,7 @@ Traducciones:
 
 [اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
-No se trata de una adaptación a Laravel de los principios SOLID ni de patrones, etcétera. Aquí encontrarás las mejores prácticas que, por lo general, son ignoradas en proyectos Laravel de la vida real.
+[![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ## Índice de contenido
 

@@ -1,5 +1,7 @@
 ![روش های روش قابل قبول توسعه پروژه های مبتنی بر فریم ورک لاراول](/images/logo-persian.png?raw=true)
 
+You might also want to check out the [real-world Laravel example application](https://github.com/alexeymezenin/laravel-realworld-example-app)
+
 <div dir="rtl">
 
 ترجمه ها:
@@ -50,9 +52,9 @@
 
 [اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
-<div dir="rtl">
+[![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
-این مستندات درباره سازگاری لاراول با اصول SOLID یا Design Pattern ها و ... نیست. اینجا شما روش های اصولی توسعه پروژه های مبتنی بر لاراول رو پیدا میکنید که معمولا داخل پروژه ها در نظر گرفته نمیشوند.
+<div dir="rtl">
 
 ## فهرست مطالب
 

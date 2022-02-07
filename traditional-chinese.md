@@ -1,6 +1,6 @@
 ![Laravel best practices](/images/logo-traditional-chinese.png?raw=true)
 
-本文件中列出的並不是 Laravel 版的 SOLID 原則、模式等。在本文件中，我們列出許多在實際 Laravel 專案中常常被忽略的一些最佳實踐。
+You might also want to check out the [real-world Laravel example application](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ## 內容
 
@@ -39,6 +39,8 @@
 [以標準格式來儲存日期時間，並以 Accesor 或 Mutator 來修改日期格式](#以標準格式來儲存日期時間並以-accesor-或-mutator-來修改日期格式)
 
 [其他優良實踐](#其他優良實踐)
+
+[![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ### **單一職責原則**
 
