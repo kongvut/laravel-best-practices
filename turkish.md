@@ -455,10 +455,10 @@ hazırlamak yerine, tercih edilen paketleri kullanın ve bu maliyetlerden kaçı
 Yapılacak | Standart araç | 3rd party araçlar
 ------------ | ------------- | -------------
 Authorization (Yetkilendirme) | Policies | Entrust, Sentinel vb.
-Compiling assets (CSS ve JS Derleme) | Laravel Mix | Grunt, Gulp, 3rd party paketler
+Compiling assets (CSS ve JS Derleme) | Laravel Mix, Vite | Grunt, Gulp, 3rd party paketler
 Geliştirme Ortamı | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer and other solutions
-Unit testing | PHPUnit, Mockery | Phpspec
+Unit testing | PHPUnit, Mockery | Phpspec, Pest
 Browser testing | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
 Template | Blade | Twig
@@ -508,6 +508,9 @@ View | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_fil
 Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Contract (interface) | sıfat ya da isim | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | sıfat | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | tekil | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | tekil | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Başa dön](#içerik)
 

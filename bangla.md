@@ -451,10 +451,10 @@ return back()->with('message', __('app.article_added'));
 কাজ | স্ট্যান্ডার্ড টুলস | থার্ডপার্টি টুলস
 ------------ | ------------- | -------------
 Authorization | Policies | Entrust, Sentinel and other packages
-Compiling assets | Laravel Mix | Grunt, Gulp, 3rd party packages
+Compiling assets | Laravel Mix, Vite | Grunt, Gulp, 3rd party packages
 Development Environment | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer and other solutions
-Unit testing | PHPUnit, Mockery | Phpspec
+Unit testing | PHPUnit, Mockery | Phpspec, Pest
 Browser testing | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
 Templates | Blade | Twig
@@ -477,7 +477,7 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
  [PSR standards](http://www.php-fig.org/psr/psr-2/) অনুসরণ করুন।
  
  
- এছাড়াও, লারাভেল কমিউনিটি কর্তিক স্বীকৃত নেমিং কনভেনশন (নামকরণ) ফলো করা যায়ঃ
+ এছাড়াও, লারাভেল কমিউনিটি কর্তৃক স্বীকৃত নামকরণের রীতি(নেমিং কনভেনশন) অনুসরণ করা যায়ঃ
 
 কি | কিভাবে | ভাল | খারাপ
 ------------ | ------------- | ------------- | -------------
@@ -505,6 +505,9 @@ View | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_fil
 Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Contract (interface) | adjective or noun | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | adjective | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 সূচীপত্রে ফিরে যান](#সূচীপত্র)
 
@@ -575,7 +578,7 @@ $this->user->create($request->validated());
 
 ### **`.env` ফাইলের ডাটা সরাসরি নিবেন না**
 
-বরং ডাটা গুলোকে কনফিগ ফাইলের মধ্যে রাখুন এবং `config()` হেল্পার ফাংশন ব্যাবহার করে আপনার এপ্লিকেশনে ব্যাবহার করুন।
+বরং ডাটা গুলোকে কনফিগ ফাইলের মধ্যে রাখুন এবং `config()` হেল্পার ফাংশন ব্যাবহার করে আপনার এপ্লিকেশনে ব্যবহার করুন।
 
 খারাপঃ
 

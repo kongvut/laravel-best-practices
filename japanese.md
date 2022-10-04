@@ -442,10 +442,10 @@ return back()->with('message', __('app.article_added'));
 タスク | 標準ツール | サードパーティ製ツール
 ------------ | ------------- | -------------
 認可 | Policies | Entrust, Sentinel または他のパッケージ
-アセットコンパイル | Laravel Mix | Grunt, Gulp, サードパーティ製パッケージ
+アセットコンパイル | Laravel Mix, Vite | Grunt, Gulp, サードパーティ製パッケージ
 開発環境 | Laravel Sail, Homestead | Docker
 デプロイ | Laravel Forge | Deployer またはその他ソリューション
-単体テスト| PHPUnit, Mockery | Phpspec
+単体テスト| PHPUnit, Mockery | Phpspec, Pest
 ブラウザテスト | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
 テンプレート | Blade | Twig
@@ -495,6 +495,9 @@ Pivotテーブル | 単数形 モデル名のアルファベット順 | article_
 コンフィグ | スネークケース | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 契約 (インターフェイス) | 形容詞または名詞 | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | 形容詞 | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 コンテンツに戻る](#コンテンツ)
 

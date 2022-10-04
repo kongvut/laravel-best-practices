@@ -110,7 +110,7 @@ public function getFullNameAttribute()
 Good:
 
 ```php
-public function getFullNameAttribute(): bool
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
@@ -477,10 +477,10 @@ Prefer to use built-in Laravel functionality and community packages instead of u
 Task | Standard tools | 3rd party tools
 ------------ | ------------- | -------------
 Authorization | Policies | Entrust, Sentinel and other packages
-Compiling assets | Laravel Mix | Grunt, Gulp, 3rd party packages
+Compiling assets | Laravel Mix, Vite | Grunt, Gulp, 3rd party packages
 Development Environment | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer and other solutions
-Unit testing | PHPUnit, Mockery | Phpspec
+Unit testing | PHPUnit, Mockery | Phpspec, Pest
 Browser testing | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
 Templates | Blade | Twig
@@ -530,6 +530,9 @@ View | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_fil
 Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Contract (interface) | adjective or noun | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | adjective | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Back to contents](#contents)
 
@@ -572,7 +575,7 @@ Common syntax | Shorter and more readable syntax
 
 [🔝 Back to contents](#contents)
 
-### **Use IoC container or facades instead of new Class**
+### **Use IoC / Service container instead of new Class**
 
 new Class syntax creates tight coupling between classes and complicates testing. Use IoC container or facades instead.
 
@@ -641,7 +644,7 @@ public function getSomeDateAttribute($date)
 
 // View
 {{ $object->ordered_at->toDateString() }}
-{{ $object->ordered_at->some_date }}
+{{ $object->some_date }}
 ```
 
 [🔝 Back to contents](#contents)

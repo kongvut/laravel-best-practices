@@ -417,10 +417,10 @@ return back()->with('message', __('app.article_added'));
 Завдання | Стандартні інструменти | Сторонні інструменти
 ------------ | ------------- | -------------
 Авторизація | Policies | Entrust, Sentinel and other packages
-Компіляція засобів | Laravel Mix | Grunt, Gulp, 3rd party packages
+Компіляція засобів | Laravel Mix, Vite | Grunt, Gulp, 3rd party packages
 Середовище розробки | Laravel Sail, Homestead | Docker
 Розгортання застосунків | Laravel Forge | Deployer and other solutions
-Unit тестування | PHPUnit, Mockery | Phpspec
+Unit тестування | PHPUnit, Mockery | Phpspec, Pest
 Тестування браузера | Laravel Dusk | Codeception
 База даних | Eloquent | SQL, Doctrine
 Шаблони | Blade | Twig
@@ -470,6 +470,8 @@ API автентифікація | Laravel Passport, Laravel Sanctum | 3rd party
 Конфігурація | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Домовленість (інтерфейс) | прикметник або іменник | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | прикметник | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | однини | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
 
 [🔝 Назад до змісту](#Зміст)
 

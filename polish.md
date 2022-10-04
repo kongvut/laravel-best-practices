@@ -460,10 +460,10 @@ Nie każ swojemu klientowi za to płacić.
 Zadanie | Standardowe narzędzia | Narzędzia innych podmiotów
 ------------ | ------------- | -------------
 Autoryzacja | Laravel Policies | Entrust, Sentinel i inne paczki
-Kompilowanie zasobów | Laravel Mix | Grunt, Gulp oraz inne
+Kompilowanie zasobów | Laravel Mix, Vite | Grunt, Gulp oraz inne
 Środowisko pracy | Laravel Sail, Homestead | Docker
 Wdrażanie | Laravel Forge | Deployer i inne rozwiązania
-Testy jednostkowe | PHPUnit, Mockery | Phpspec
+Testy jednostkowe | PHPUnit, Mockery | Phpspec, Pest
 Testy przeglądarkowe | Laravel Dusk | Codeception
 Baza danych | Eloquent | SQL, Doctrine
 Szablony widoków | Blade | Twig
@@ -513,6 +513,9 @@ Widok | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_fi
 Pliki konfiguracyjne | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Kontrakt (interfejs) | przymiotnik lub rzeczownik | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Cecha (trait) | przymiotnik | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Wróć do spisu treści](#spis-treści)
 

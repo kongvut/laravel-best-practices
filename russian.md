@@ -437,10 +437,10 @@ Laravel имеет встроенные инструменты для решен
 Задача | Стандартные инструмент | Нестандартные инструмент
 ------------ | ------------- | -------------
 Авторизация | Политики | Entrust, Sentinel и др. пакеты, собственное решение
-Работа с JS, CSS и пр. | Laravel Mix | Grunt, Gulp, сторонние пакеты
+Работа с JS, CSS и пр. | Laravel Mix, Vite | Grunt, Gulp, сторонние пакеты
 Среда разработки | Laravel Sail, Homestead | Docker
 Разворачивание приложений | Laravel Forge | Deployer и многие другие
-Тестирование | Phpunit, Mockery | Phpspec
+Тестирование | Phpunit, Mockery | Phpspec, Pest
 e2e тестирование | Laravel Dusk | Codeception
 Работа с БД | Eloquent | SQL, построитель запросов, Doctrine
 Шаблоны | Blade | Twig
@@ -490,6 +490,9 @@ Pivot таблица | имена моделей в алфавитном пор�
 Конфигурационный файл | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Контракт (интерфейс) | прилагательное или существительное | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Трейт | прилагательное | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | единственное число | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Наверх](#Содержание)
 

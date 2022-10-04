@@ -446,10 +446,10 @@ return back()->with('message', __('app.article_added'));
 想要实现的功能 | 标准工具 | 第三方工具
 ------------ | ------------- | -------------
 权限 | Policies | Entrust, Sentinel 或者其他扩展包
-资源编译工具| Laravel Mix | Grunt, Gulp, 或者其他第三方包
+资源编译工具| Laravel Mix, Vite | Grunt, Gulp, 或者其他第三方包
 开发环境| Laravel Sail, Homestead | Docker
 部署 | Laravel Forge | Deployer 或者其他解决方案
-自动化测试 | PHPUnit, Mockery | Phpspec
+自动化测试 | PHPUnit, Mockery | Phpspec, Pest
 页面预览测试 | Laravel Dusk | Codeception
 DB操纵 | Eloquent | SQL, Doctrine
 模板 | Blade | Twig
@@ -499,6 +499,9 @@ hasOne或belongsTo关系 | 单数 | articleComment | ~~articleComments, article_
 配置 | 蛇形命名 | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 内容 (interface) | 形容词或名词 | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | 使用形容词 | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 返回目录](#内容)
 

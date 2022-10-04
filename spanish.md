@@ -457,10 +457,10 @@ Prioriza la utilización de funcionalidades integradas y los paquetes de la comu
 Tarea | Herramienta estándar | Herramientas de terceras personas
 ------------ | ------------- | -------------
 Autorización | Policies | Entrust, Sentinel y otros paquetes
-Compilar assets | Laravel Mix | Grunt, Gulp, paquetes de terceros
+Compilar assets | Laravel Mix, Vite | Grunt, Gulp, paquetes de terceros
 Entorno de desarrollo | Laravel Sail, Homestead | Docker
 Deployment | Laravel Forge | Deployer y otras soluciones
-Unit testing | PHPUnit, Mockery | Phpspec
+Unit testing | PHPUnit, Mockery | Phpspec, Pest
 Testeo en el navegador | Laravel Dusk | Codeception
 Base de datos | Eloquent | SQL, Doctrine
 Plantillas | Blade | Twig
@@ -510,6 +510,9 @@ Vistas | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_f
 Configuración | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Contrato (interface) | adjetivo o sustantivo | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | adjetivo | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Volver al índice](#índice-de-contenido)
 

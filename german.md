@@ -407,7 +407,7 @@ Besser:
 ```php
 <input id="article" type="hidden" value='@json($article)'>
 
-Oder
+oder
 
 <button class="js-fav-article" data-article='@json($article)'>{{ $article->name }}<button>
 ```
@@ -455,10 +455,10 @@ Verwenden Sie vorzugsweise integrierte Laravel-Funktionen und Community-Pakete, 
 Aufgabe | Standardwerkzeuge | Tools von Drittanbietern
 ------------ | ------------- | -------------
 Autorisierung | Policies | Entrust, Sentinel und andere Pakete
-Assets kompilieren | Laravel Mix | Grunt, Gulp, 3rd-Party-Pakete
+Assets kompilieren | Laravel Mix, Vite | Grunt, Gulp, 3rd-Party-Pakete
 Entwicklungsumgebung | Laravel Sail, Homestead | Docker
 Bereitstellung | Laravel Forge | Deployer und andere Lösungen
-Unit Tests | PHPUnit, Mockery | Phpspec
+Unit Tests | PHPUnit, Mockery | Phpspec, Pest
 Browsertests | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
 Templates | Blade | Twig
@@ -508,6 +508,9 @@ View | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_fil
 Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Vertrag (Interface) | Adjektiv oder Substantiv | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | Adjektiv | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Zurück zum Inhaltsverzeichnis](#inhaltsverzeichnis)
 
@@ -612,6 +615,7 @@ Gut:
 ```php
 // Model
 protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+
 public function getSomeDateAttribute($date)
 {
     return $date->format('m-d');
@@ -626,8 +630,8 @@ public function getSomeDateAttribute($date)
 
 ### **Andere gute Praktiken**
 
-Fügen Sie niemals Logik in Routes Dateien ein.
+Logik sollte nicht in Routes Dateien eingebaut werden.
 
-Minimieren Sie die Verwendung von vanilla PHP in Blade-Templates.
+Minimieren Sie die Verwendung von Vanilla PHP in Blade-Templates.
 
 [🔝 Zurück zum Inhaltsverzeichnis](#inhaltsverzeichnis)

@@ -449,10 +449,10 @@ Préférez utiliser les fonctionnalités intégrées de Laravel et les packages 
 Tâche | Outils standard | Outils tiers
 ------------ | ------------- | -------------
 Autorisation | Policies | Entrust, Sentinel et d'autres packages
-Compiler des assets | Laravel Mix | Grunt, Gulp, packages tiers
+Compiler des assets | Laravel Mix, Vite | Grunt, Gulp, packages tiers
 Environnement de développement | Laravel Sail, Homestead | Docker
 Déploiement | Laravel Forge | Deployer et d'autre solutions
-Tests unitaires | PHPUnit, Mockery | Phpspec
+Tests unitaires | PHPUnit, Mockery | Phpspec, Pest
 Test du navigateur | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
 Templates | Blade | Twig
@@ -502,6 +502,9 @@ Vue | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_filt
 Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calendar.php~~
 Contract (interface) | adjectif ou nom | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | adjectif | Notifiable | ~~NotificationTrait~~
+Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
+Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
 
 [🔝 Retour au contenu](#contents)
 
