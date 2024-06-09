@@ -1,12 +1,14 @@
 ![Хорошие практики Laravel](/images/logo-russian.png?raw=true)
 
-Возможно, вам также будет интересно взглянуть на [пример Laravel приложения](https://github.com/alexeymezenin/laravel-realworld-example-app)
+Возможно, вам также будет интересно взглянуть на [пример Laravel приложения](https://github.com/alexeymezenin/laravel-realworld-example-app) и на [SQL запросы, генерируемые Eloquent ORM](https://github.com/alexeymezenin/eloquent-sql-reference)
 
 [![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
 ## Содержание
 
 [Принцип единственной ответственности (Single responsibility principle)](#Принцип-единственной-ответственности-single-responsibility-principle)
+
+[Методы должны делать что-то одно](#Методы-должны-делать-что-то-одно)
 
 [Тонкие контроллеры, толстые модели](#Тонкие-контроллеры-толстые-модели)
 
@@ -50,12 +52,54 @@
 
 ### **Принцип единственной ответственности (Single responsibility principle)**
 
-Каждый класс и метод должны выполнять лишь одну функцию.
+Каждый класс должен иметь только одну обязанность.
 
 Плохо:
 
 ```php
-public function getFullNameAttribute()
+public function update(Request $request): string
+{
+    $validated = $request->validate([
+        'title' => 'required|max:255',
+        'events' => 'required|array:date,type'
+    ]);
+
+    foreach ($request->events as $event) {
+        $date = $this->carbon->parse($event['date'])->toString();
+
+        $this->logger->log('Update event ' . $date . ' :: ' . $);
+    }
+
+    $this->event->updateGeneralEvent($request->validated());
+
+    return back();
+}
+```
+
+Хорошо:
+
+```php
+public function update(UpdateRequest $request): string
+{
+    $this->logService->logEvents($request->events);
+
+    $this->event->updateGeneralEvent($request->validated());
+
+    return back();
+}
+```
+
+[🔝 Наверх](#Содержание)
+
+
+### **Методы должны делать что-то одно**
+
+Функция должна делать что-то одно и делать это хорошо.
+
+Плохо:
+
+```php
+public function getFullNameAttribute(): string
 {
     if (auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified()) {
         return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
@@ -68,7 +112,7 @@ public function getFullNameAttribute()
 Хорошо:
 
 ```php
-public function getFullNameAttribute(): bool
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
@@ -148,7 +192,7 @@ public function store(Request $request)
         'publish_at' => 'nullable|date',
     ]);
 
-    ....
+    ...
 }
 ```
 
@@ -156,8 +200,8 @@ public function store(Request $request)
 
 ```php
 public function store(PostRequest $request)
-{    
-    ....
+{
+    ...
 }
 
 class PostRequest extends Request
@@ -188,7 +232,7 @@ public function store(Request $request)
         $request->file('image')->move(public_path('images') . 'temp');
     }
     
-    ....
+    ...
 }
 ```
 
@@ -199,7 +243,7 @@ public function store(Request $request)
 {
     $this->articleService->handleUploadedImage($request->file('image'));
 
-    ....
+    ...
 }
 
 class ArticleService
@@ -260,7 +304,7 @@ public function getArticles(): Collection
 
 ### **Предпочитайте Eloquent конструктору запросов (query builder) и сырым запросам в БД. Предпочитайте работу с коллекциями работе с массивами**
 
-Eloquent позволяет писать максимально читаемый код, а изменять функционал приложения несоизмеримо легче. У Eloquent также есть ряд удобных и мощных инструментов.
+Eloquent позволяет писать максимально читаемый код, а изменять функционал приложения несоизмеримо легче. У Eloquent также есть ряд удобных и мощных инструментов. Вам может быть интересен [справочник перевода Eloquent запросов в SQL](https://github.com/alexeymezenin/eloquent-sql-reference)
 
 Плохо:
 
@@ -296,6 +340,7 @@ $article = new Article;
 $article->title = $request->title;
 $article->content = $request->content;
 $article->verified = $request->verified;
+
 // Привязать статью к категории.
 $article->category_id = $category->id;
 $article->save();
@@ -313,7 +358,7 @@ $category->article()->create($request->validated());
 
 Плохо (будет выполнен 101 запрос в БД для 100 пользователей):
 
-```php
+```blade
 @foreach (User::all() as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -324,8 +369,6 @@ $category->article()->create($request->validated());
 ```php
 $users = User::with('profile')->get();
 
-...
-
 @foreach ($users as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -335,7 +378,7 @@ $users = User::with('profile')->get();
 
 ### **Используйте метод chunk при работе с большим количеством данных**
 
-Bad ():
+Bad:
 
 ```php
 $users = $this->get();
@@ -378,7 +421,7 @@ if ($this->hasJoins())
 
 Плохо:
 
-```php
+```javascript
 let article = `{{ json_encode($article) }}`;
 ```
 
@@ -394,7 +437,7 @@ let article = `{{ json_encode($article) }}`;
 
 В Javascript файле:
 
-```php
+```javascript
 let article = $('#article').val();
 ```
 
@@ -460,9 +503,9 @@ e2e тестирование | Laravel Dusk | Codeception
 
 ### **Соблюдайте соглашения сообщества об именовании**
 
- Следуйте [стандартам PSR](http://www.php-fig.org/psr/psr-2/) при написании кода.
- 
- Также, соблюдайте другие cоглашения об именовании:
+Следуйте [стандартам PSR](https://www.php-fig.org/psr/psr-12/) при написании кода.
+
+Также, соблюдайте другие cоглашения об именовании:
 
 Что | Правило | Принято | Не принято
 ------------ | ------------- | ------------- | -------------
@@ -491,8 +534,49 @@ Pivot таблица | имена моделей в алфавитном пор�
 Контракт (интерфейс) | прилагательное или существительное | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Трейт | прилагательное | Notifiable | ~~NotificationTrait~~
 Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
-Enum | единственное число | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
-FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Enum | единственное число | UserType | ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Seeder | singular | UserSeeder | ~~UsersSeeder~~
+
+[🔝 Наверх](#Содержание)
+
+### **Приоритет соглашений над конфигурацией**
+
+Пока вы следуете принятым соглашениям, вам не нужно добавлять в код дополнительную конфигурацию.
+
+Плохо:
+
+```php
+// Название таблицы 'Customer'
+// Первичный ключ 'customer_id'
+class Customer extends Model
+{
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    protected $table = 'Customer';
+    protected $primaryKey = 'customer_id';
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'role_customer', 'customer_id', 'role_id');
+    }
+}
+```
+
+Хорошо:
+
+```php
+// Название таблицы 'customers'
+// Первичный ключ 'id'
+class Customer extends Model
+{
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+}
+```
 
 [🔝 Наверх](#Содержание)
 
@@ -554,7 +638,7 @@ public function __construct(User $user)
     $this->user = $user;
 }
 
-....
+...
 
 $this->user->create($request->validated());
 ```
@@ -596,7 +680,9 @@ $apiKey = config('api.key');
 
 ```php
 // Модель
-protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+protected $casts = [
+    'ordered_at' => 'datetime',
+];
 // Читатель (accessor)
 public function getSomeDateAttribute($date)
 {
@@ -606,6 +692,41 @@ public function getSomeDateAttribute($date)
 // Шаблон
 {{ $object->ordered_at->toDateString() }}
 {{ $object->ordered_at->some_date }}
+```
+
+[🔝 Наверх](#Содержание)
+
+### **Не используйте DocBlock**
+
+DocBlock ухудшают читаемость кода. Вместо них используйте хорошие именя для методов и современный синтаксис PHP, например описание возвращаемых типов (return type hints).
+
+Плохо:
+
+```php
+/**
+ * Функция проверяет есть ли в строке символы, которые остутствуют в ASCII.
+ *
+ * @param string $string Строка, которую мы получаем с фронтенда и которая
+ *                       может содержать символы, не входящие в ASCII.
+ *                       Возвращает True, если таких символов в строке нет.
+ *
+ * @return bool
+ * @author  Василий Иванов
+ *
+ * @license GPL
+ */
+
+public function checkString($string)
+{
+}
+```
+
+Хорошо:
+
+```php
+public function isValidAsciiString(string $string): bool
+{
+}
 ```
 
 [🔝 Наверх](#Содержание)

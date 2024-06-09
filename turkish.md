@@ -85,7 +85,7 @@ Bir class ya da method'un tek bir görevi ve amacı olmalıdır.
 Kötü:
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     if (auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified()) {
         return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
@@ -98,22 +98,22 @@ public function getFullNameAttribute()
 İyi:
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
 
-public function isVerifiedClient()
+public function isVerifiedClient(): bool
 {
     return auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified();
 }
 
-public function getFullNameLong()
+public function getFullNameLong(): string
 {
     return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
 }
 
-public function getFullNameShort()
+public function getFullNameShort(): string
 {
     return $this->first_name[0] . '. ' . $this->last_name;
 }
@@ -179,7 +179,7 @@ public function store(Request $request)
         'publish_at' => 'nullable|date',
     ]);
 
-    ....
+    ...
 }
 ```
 
@@ -187,8 +187,8 @@ public function store(Request $request)
 
 ```php
 public function store(PostRequest $request)
-{    
-    ....
+{
+    ...
 }
 
 class PostRequest extends Request
@@ -219,7 +219,7 @@ public function store(Request $request)
         $request->file('image')->move(public_path('images') . 'temp');
     }
     
-    ....
+    ...
 }
 ```
 
@@ -230,7 +230,7 @@ public function store(Request $request)
 {
     $this->articleService->handleUploadedImage($request->file('image'));
 
-    ....
+    ...
 }
 
 class ArticleService
@@ -329,6 +329,7 @@ $article = new Article;
 $article->title = $request->title;
 $article->content = $request->content;
 $article->verified = $request->verified;
+
 // Add category to article
 $article->category_id = $category->id;
 $article->save();
@@ -346,7 +347,7 @@ $category->article()->create($request->validated());
 
 Kötü (100 kullanıcı için, 101 DB tane query çalıştırılacak):
 
-```php
+```blade
 @foreach (User::all() as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -356,8 +357,6 @@ Kötü (100 kullanıcı için, 101 DB tane query çalıştırılacak):
 
 ```php
 $users = User::with('profile')->get();
-
-...
 
 @foreach ($users as $user)
     {{ $user->profile->name }}
@@ -393,7 +392,7 @@ if ($this->hasJoins())
 
 Kötü:
 
-```php
+```javascript
 let article = `{{ json_encode($article) }}`;
 ```
 
@@ -478,15 +477,15 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 
 ### **Laravel'de isimlendirme**
 
- [PSR standards](http://www.php-fig.org/psr/psr-2/) takip edin.
- 
- Ayrıca, topluluk tarafından kabul gören isimlendirmeler:
+[PSR standards](https://www.php-fig.org/psr/psr-12/) takip edin.
+
+Ayrıca, topluluk tarafından kabul gören isimlendirmeler:
 
 Ne | Nasıl | İyi | Kötü
 ------------ | ------------- | ------------- | -------------
 Controller | tekil | ArticleController | ~~ArticlesController~~
 Route | çoğul | articles/1 | ~~article/1~~
-Named route | snake_case ve dot notation (nokta kullanımı) | users.show_active | ~~users.show-active, show-active-users~~
+Route name | snake_case ve dot notation (nokta kullanımı) | users.show_active | ~~users.show-active, show-active-users~~
 Model | tekil | User | ~~Users~~
 hasOne or belongsTo relationship | tekil | articleComment | ~~articleComments, article_comment~~
 All other relationships | çoğul | articleComments | ~~articleComment, article_comments~~
@@ -509,8 +508,9 @@ Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calenda
 Contract (interface) | sıfat ya da isim | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | sıfat | Notifiable | ~~NotificationTrait~~
 Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
-Enum | tekil | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
-FormRequest | tekil | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Enum | tekil | UserType | ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | tekil | UpdateUserRequest | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Seeder | singular | UserSeeder | ~~UsersSeeder~~
 
 [🔝 Başa dön](#içerik)
 
@@ -572,7 +572,7 @@ public function __construct(User $user)
     $this->user = $user;
 }
 
-....
+...
 
 $this->user->create($request->validated());
 ```
@@ -614,7 +614,10 @@ Kötü:
 
 ```php
 // Model
-protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+protected $casts = [
+    'ordered_at' => 'datetime',
+];
+
 public function getSomeDateAttribute($date)
 {
     return $date->format('m-d');

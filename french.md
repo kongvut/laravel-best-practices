@@ -46,39 +46,39 @@ Traductions:
 
 [Principe de responsabilité unique](#principe-de-responsabilité-unique)
 
-[Modèles Fat, contrôleurs maigres](#modèles-Fat-contrôleurs-maigres)
+[Gros Modèles, contrôleurs maigres](#gros-modèles-contrôleurs-maigres)
 
 [Validation](#validation)
 
-[La logique métier doit être en classe de service](#la-logique-métier-doit-être-en-classe-de-service)
+[La logique métier doit être dans une classe de service](#la-logique-métier-doit-être-dans-une-classe-de-service)
 
 [Ne te répète pas (DRY)](#ne-te-répète-pas-dry)
 
-[Préférez utiliser Eloquent à l’utilisation de Query Builder et de requêtes SQL brutes. Préférez les collections aux tableaux](#préférez-utiliser-eloquent-à-l-utilisation-de-Query-Builder-et-de-requêtes-SQL-brutes-Préférez-les-collections-aux-tableaux)
+[Préférez utiliser Eloquent à l’utilisation de Query Builder et de requêtes SQL brutes. Préférez les collections aux tableaux](#préférez-utiliser-eloquent-à-lutilisation-de-query-builder-et-de-requêtes-sql-brutes-préférez-les-collections-aux-tableaux)
 
-[Affectation en masse](#affectation-de-masse)
+[Affectation en masse](#affectation-en-masse)
 
-[N'exécutez pas de requêtes dans les modèles de blade et utilisez un chargement rapide (N + 1 problème)](#n-exécutez-pas-de-requêtes-dans-les-modèles-de-blade-et-utilisez-un-chargement-rapide-n--1-problem)
+[N'exécutez pas de requêtes dans les modèles de blade et utilisez un chargement rapide (N + 1 problème)](#nexécutez-pas-de-requêtes-dans-les-modèles-blade-et-utilisez-un-chargement-rapide-eager-loading-problème-n--1)
 
-[Commentez votre code, mais préférez la méthode descriptive et les noms de variables aux commentaires](#commentez-votre-code-mais-préférez-la-méthode-descriptive-et-les-noms-de-variables-aux-commentaires)
+[Commentez votre code, mais préférez une méthode descriptive et les noms de variables aux commentaires](#commentez-votre-code-mais-préférez-une-méthode-descriptive-et-des-noms-de-variables-aux-commentaires)
 
-[Ne mettez pas JS et CSS dans les templates Blade et ne mettez pas de HTML dans les classes PHP](#ne-mettez-pas-JS-et-CSS-dans-les-templates-Blade-et-ne-mettez-pas-de-HTML-dans-les-classes-PHP)
+[Ne mettez pas JS et CSS dans les templates Blade et ne mettez pas de HTML dans les classes PHP](#ne-mettez-pas-js-et-css-dans-les-templates-blade-et-ne-mettez-pas-de-html-dans-les-classes-php)
 
 [Utilisez des fichiers de configuration et de langue, des constantes au lieu du texte dans le code](#utilisez-des-fichiers-de-configuration-et-de-langue-des-constantes-au-lieu-du-texte-dans-le-code)
 
-[Utiliser les outils standard de Laravel acceptés par la communauté](#utiliser-les-outils-standard-de-Laravel-acceptés-par-la-communauté)
+[Utiliser les outils standard de Laravel acceptés par la communauté](#utiliser-les-outils-standard-de-laravel-acceptés-par-la-communauté)
 
-[Suivre les conventions de nommage de Laravel](#suivre-les-conventions-de-nommage-de-Laravel)
+[Suivre les conventions de nommage de Laravel](#suivre-les-conventions-de-nommage-de-laravel)
 
 [Utilisez une syntaxe plus courte et plus lisible dans la mesure du possible](#utilisez-une-syntaxe-plus-courte-et-plus-lisible-dans-la-mesure-du-possible)
 
-[Utilisez un conteneur IoC ou des façades au lieu de la nouvelle classe](#utilisez-un-conteneur-IoC-ou-des-façades-au-lieu-de-la-nouvelle-classe)
+[Utilisez un conteneur IoC ou des façades au lieu de la nouvelle classe](#utilisez-un-conteneur-ioc-ou-des-façades-au-lieu-de-la-nouvelle-classe)
 
-[Ne pas obtenir les données du fichier `.env` directement](#ne-pas-obtenir-les-données-du-fichier-env-directement)
+[Ne pas obtenir directement les données du fichier `.env` directement](#ne-pas-obtenir-directement-les-données-du-fichier-env)
 
 [Stocker les dates au format standard. Utiliser des accesseurs et des mutateurs pour modifier le format de date](#stocker-les-dates-au-format-standard-Utiliser-des-accesseurs-et-des-mutateurs-pour-modifier-le-format-de-date)
 
-[Autres bonnes pratiques](#autres-bonnes-pratiques)
+[D'autres bonnes pratiques](#dautres-bonnes-pratiques)
 
 ### **Principe de responsabilité unique**
 
@@ -87,7 +87,7 @@ Une classe et une méthode ne devraient avoir qu'une seule responsabilité.
 Mal:
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     if (auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified()) {
         return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
@@ -100,22 +100,22 @@ public function getFullNameAttribute()
 Bien:
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
 
-public function isVerifiedClient()
+public function isVerifiedClient(): bool
 {
     return auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified();
 }
 
-public function getFullNameLong()
+public function getFullNameLong(): string
 {
     return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
 }
 
-public function getFullNameShort()
+public function getFullNameShort(): string
 {
     return $this->first_name[0] . '. ' . $this->last_name;
 }
@@ -180,7 +180,7 @@ public function store(Request $request)
         'publish_at' => 'nullable|date',
     ]);
 
-    ....
+    ...
 }
 ```
 
@@ -188,8 +188,8 @@ Bien:
 
 ```php
 public function store(PostRequest $request)
-{    
-    ....
+{
+    ...
 }
 
 class PostRequest extends Request
@@ -220,7 +220,7 @@ public function store(Request $request)
         $request->file('image')->move(public_path('images') . 'temp');
     }
     
-    ....
+    ...
 }
 ```
 
@@ -231,7 +231,7 @@ public function store(Request $request)
 {
     $this->articleService->handleUploadedImage($request->file('image'));
 
-    ....
+    ...
 }
 
 class ArticleService
@@ -328,6 +328,7 @@ $article = new Article;
 $article->title = $request->title;
 $article->content = $request->content;
 $article->verified = $request->verified;
+
 // Add category to article
 $article->category_id = $category->id;
 $article->save();
@@ -345,7 +346,7 @@ $category->article()->create($request->validated());
 
 Mal (Pour 100 utilisateurs, 101 requêtes DB seront exécutées):
 
-```php
+```blade
 @foreach (User::all() as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -355,8 +356,6 @@ Bien (pour 100 utilisateurs, 2 requêtes de base de données seront exécutées)
 
 ```php
 $users = User::with('profile')->get();
-
-...
 
 @foreach ($users as $user)
     {{ $user->profile->name }}
@@ -392,7 +391,7 @@ if ($this->hasJoins())
 
 Mal:
 
-```php
+```javascript
 let article = `{{ json_encode($article) }}`;
 ```
 
@@ -472,9 +471,9 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 
 ### **Suivre les conventions de nommage de Laravel**
 
- Suivre [Normes PSR](http://www.php-fig.org/psr/psr-2/).
+Suivre [Normes PSR](https://www.php-fig.org/psr/psr-12/).
 
- Suivez également les conventions de nommage acceptées par la communauté Laravel:
+Suivez également les conventions de nommage acceptées par la communauté Laravel:
 
 Quoi | Comment | Bien | Mal
 ------------ | ------------- | ------------- | -------------
@@ -503,8 +502,9 @@ Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calenda
 Contract (interface) | adjectif ou nom | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | adjectif | Notifiable | ~~NotificationTrait~~
 Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
-Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
-FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Enum | singular | UserType | ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Seeder | singular | UserSeeder | ~~UsersSeeder~~
 
 [🔝 Retour au contenu](#contents)
 
@@ -566,7 +566,7 @@ public function __construct(User $user)
     $this->user = $user;
 }
 
-....
+...
 
 $this->user->create($request->validated());
 ```
@@ -608,7 +608,10 @@ Bien:
 
 ```php
 // Model
-protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+protected $casts = [
+    'ordered_at' => 'datetime',
+];
+
 public function getSomeDateAttribute($date)
 {
     return $date->format('m-d');

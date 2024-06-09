@@ -106,7 +106,7 @@ You might also want to check out the [real-world Laravel example application](ht
 </div>
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     if (auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified()) {
         return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
@@ -122,22 +122,22 @@ public function getFullNameAttribute()
 </div>
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
 
-public function isVerifiedClient()
+public function isVerifiedClient(): bool
 {
     return auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified();
 }
 
-public function getFullNameLong()
+public function getFullNameLong(): string
 {
     return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
 }
 
-public function getFullNameShort()
+public function getFullNameShort(): string
 {
     return $this->first_name[0] . '. ' . $this->last_name;
 }
@@ -211,7 +211,7 @@ public function store(Request $request)
         'publish_at' => 'nullable|date',
     ]);
 
-    ....
+    ...
 }
 ```
 <div dir="rtl">
@@ -222,8 +222,8 @@ public function store(Request $request)
 
 ```php
 public function store(PostRequest $request)
-{    
-    ....
+{
+    ...
 }
 
 class PostRequest extends Request
@@ -257,7 +257,7 @@ public function store(Request $request)
         $request->file('image')->move(public_path('images') . 'temp');
     }
     
-    ....
+    ...
 }
 ```
 <div dir="rtl">
@@ -271,7 +271,7 @@ public function store(Request $request)
 {
     $this->articleService->handleUploadedImage($request->file('image'));
 
-    ....
+    ...
 }
 
 class ArticleService
@@ -385,6 +385,7 @@ $article = new Article;
 $article->title = $request->title;
 $article->content = $request->content;
 $article->verified = $request->verified;
+
 // Add category to article
 $article->category_id = $category->id;
 $article->save();
@@ -408,7 +409,7 @@ $category->article()->create($request->all());
 
 </div>
 
-```php
+```blade
 @foreach (User::all() as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -421,8 +422,6 @@ $category->article()->create($request->all());
 
 ```php
 $users = User::with('profile')->get();
-
-...
 
 @foreach ($users as $user)
     {{ $user->profile->name }}
@@ -471,7 +470,7 @@ if ($this->hasJoins())
 
 </div>
 
-```php
+```javascript
 let article = `{{ json_encode($article) }}`;
 ```
 <div dir="rtl">
@@ -568,7 +567,7 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 
 ### **از قرارداد های لاراول برای نامگذاری ها استفاده کنید**
 
-از استاندارد های php که به [PSR](http://www.php-fig.org/psr/psr-2/) معروف است استفاده کنید.
+از استاندارد های php که به [PSR](https://www.php-fig.org/psr/psr-12/) معروف است استفاده کنید.
  
 همچنین روش های نامگذاری مورد قبول جامعه کاربری لاراول:
 
@@ -578,7 +577,7 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 ------------ | ------------- | ------------- | -------------
 Controller | اسامی مفرد | ArticleController | ~~ArticlesController~~
 Route | اسامی جمع | articles/1 | ~~article/1~~
-Named route | روش snake_case همراه با نقاط اتصال | users.show_active | ~~users.show-active, show-active-users~~
+Route name | روش snake_case همراه با نقاط اتصال | users.show_active | ~~users.show-active, show-active-users~~
 Model | اسامی مفرد | User | ~~Users~~
 hasOne or belongsTo relationship | اسامی مفرد | articleComment | ~~articleComments, article_comment~~
 All other relationships | اسامی جمع | articleComments | ~~articleComment, article_comments~~
@@ -601,8 +600,9 @@ Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calenda
 Contract (interface) | صفت یا اسم | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | صفت | Notifiable | ~~NotificationTrait~~
 Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
-Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
-FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Enum | singular | UserType | ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Seeder | singular | UserSeeder | ~~UsersSeeder~~
 
 <div dir="rtl">
 
@@ -681,7 +681,7 @@ public function __construct(User $user)
     $this->user = $user;
 }
 
-....
+...
 
 $this->user->create($request->all());
 ```
@@ -735,7 +735,10 @@ $apiKey = config('api.key');
 
 ```php
 // Model
-protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+protected $casts = [
+    'ordered_at' => 'datetime',
+];
+
 public function getSomeDateAttribute($date)
 {
     return $date->format('m-d');
@@ -772,7 +775,7 @@ Route::get('user/1', function (User $user) {
 
 ```php
 // Route
-Route::get('user/1', 'UserController@show');
+Route::get('users/1', 'UserController@show');
 
 // Controlelr
 class UserController extends Controller 

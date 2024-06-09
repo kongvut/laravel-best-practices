@@ -83,6 +83,7 @@ You might also want to check out the [real-world Laravel example application](ht
 [<p dir="rtl">تاریخوں کو معیاری شکل میں محفوظ کریں۔ ڈیٹ فارمیٹ میں ترمیم کرنے کے لیے accessors اور mutators کا استعمال کریں۔</p>](#17)
 
 [<p dir="rtl">دوسرے اچھے طریقے۔</p>](#18)
+
 ### <p dir="rtl">1</p>
 ### **<p dir="rtl">واحد ذمہ داری کا اصول</p>**
 
@@ -91,7 +92,7 @@ You might also want to check out the [real-world Laravel example application](ht
 <p dir="rtl">❌ غلط طریقہ:</p>
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     if (auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified()) {
         return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
@@ -104,22 +105,22 @@ public function getFullNameAttribute()
 <p dir="rtl">✔️ درست طریقہ:</p>
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
 
-public function isVerifiedClient()
+public function isVerifiedClient(): bool
 {
     return auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified();
 }
 
-public function getFullNameLong()
+public function getFullNameLong(): string
 {
     return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
 }
 
-public function getFullNameShort()
+public function getFullNameShort(): string
 {
     return $this->first_name[0] . '. ' . $this->last_name;
 }
@@ -168,6 +169,7 @@ class Client extends Model
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">3</p>
 ### **<p dir="rtl">توثیق</p>**
 
@@ -183,7 +185,7 @@ public function store(Request $request)
         'publish_at' => 'nullable|date',
     ]);
 
-    ....
+    ...
 }
 ```
 
@@ -191,8 +193,8 @@ public function store(Request $request)
 
 ```php
 public function store(PostRequest $request)
-{    
-    ....
+{
+    ...
 }
 
 class PostRequest extends Request
@@ -209,6 +211,7 @@ class PostRequest extends Request
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">4</p>
 ### **<p dir="rtl">کاروباری منطق service class میں ہونی چاہیے۔</p>**
 
@@ -223,7 +226,7 @@ public function store(Request $request)
         $request->file('image')->move(public_path('images') . 'temp');
     }
     
-    ....
+    ...
 }
 ```
 
@@ -234,7 +237,7 @@ public function store(Request $request)
 {
     $this->articleService->handleUploadedImage($request->file('image'));
 
-    ....
+    ...
 }
 
 class ArticleService
@@ -249,6 +252,7 @@ class ArticleService
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">5</p>
 ### **<p dir="rtl">اپنے آپ کو نہ دہرائیں (DRY)</p>**
 
@@ -294,6 +298,7 @@ public function getArticles()
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">6</p>
 ### **<p dir="rtl">Query Builderاور raw SQL queries پر Eloquentاستعمال کرنے کو  ترجیح دیں ۔ arrays پر collections کو ترجیح دیں۔</p>**
 
@@ -323,6 +328,7 @@ Article::has('user.profile')->verified()->latest()->get();
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">7</p>
 ### **<p dir="rtl">بڑے پیمانے پر تفویض</p>**
 
@@ -333,6 +339,7 @@ $article = new Article;
 $article->title = $request->title;
 $article->content = $request->content;
 $article->verified = $request->verified;
+
 // Add category to article
 $article->category_id = $category->id;
 $article->save();
@@ -345,13 +352,14 @@ $category->article()->create($request->validated());
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">8</p>
 ### **<p dir="rtl">Blade templates میں queries نہ  چلایئں اور eager loading کا استعمال کریں (N + 1 مسئلہ)</p>**
 
 <p dir="rtl">❌ غلط طریقہ:</p>
 <p dir="rtl">غلط (100 صارفین کے لیے ، 101 DB queries استعمال ہوں گی ):</p>
 
-```php
+```blade
 @foreach (User::all() as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -363,14 +371,13 @@ $category->article()->create($request->validated());
 ```php
 $users = User::with('profile')->get();
 
-...
-
 @foreach ($users as $user)
     {{ $user->profile->name }}
 @endforeach
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">9</p>
 ### **<p dir="rtl">اپنے کوڈ پر تبصرہ کریں ، لیکن تبصرے پر وضاحتی method اور variables ناموں کو ترجیح دیں</p>**
 
@@ -394,12 +401,13 @@ if ($this->hasJoins())
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">10</p>
 ### **<p dir="rtl">Blade templates میں JS اور CSS نہ ڈالیں اور PHP Classes میں کوئی HTML نہ ڈالیں۔</p>**
 
 <p dir="rtl">❌ غلط طریقہ:</p>
 
-```php
+```javascript
 let article = `{{ json_encode($article) }}`;
 ```
 
@@ -423,6 +431,7 @@ let article = $('#article').val();
 
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">11</p>
 ### **<p dir="rtl">کوڈ میں ٹیکسٹ کی بجائے config، لینگویج فائلز اور constants استعمال کریں۔</p>**
 
@@ -449,13 +458,14 @@ return back()->with('message', __('app.article_added'));
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">12</p>
 ### **<p dir="rtl">Laravel کے معیاری ٹولز کا استعمال کریں جو کمیونٹی نے قبول کیے ہیں۔</p>**
 
 <p dir="rtl">تھرڈ پارٹی پیکجز اور ٹولز استعمال کرنے کے بجائے بلٹ ان Laravel functionality اور کمیونٹی پیکجز استعمال کرنے کو ترجیح دیں۔ کوئی بھی ڈویلپر جو مستقبل میں آپ کی ایپ کے ساتھ کام کرے گا اسے نئے ٹولز سیکھنے کی ضرورت ہوگی۔ نیز ، جب آپ تھرڈ پارٹی پیکیج یا ٹول استعمال کر رہے ہیں تو Laravel کمیونٹی سے مدد حاصل کرنے کے امکانات نمایاں طور پر کم ہیں۔ اپنے کلائنٹ کو اس کی ادائیگی کرنے پر مجبور نہ کریں ۔
  </p>
 
-کام | معیاری ٹولز  |  تھرڈ پارٹی ٹولز
+کام | معیاری ٹولز  | تھرڈ پارٹی ٹولز
 ------------ | ------------- | -------------
 Authorization | Policies | Entrust, Sentinel and other packages
 Compiling assets | Laravel Mix, Vite | Grunt, Gulp, 3rd party packages
@@ -478,6 +488,7 @@ Task scheduling | Laravel Task Scheduler | Scripts and 3rd party packages
 DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">13</p>
 ### **<p dir="rtl">Laravel کےاپنے نام رکھنے کے  طریقوں پر عمل کریں</p>**
 <p dir="rtl">پیروی <a href="http://www.php-fig.org/psr/psr-2">PSR  معیارات </a></p>
@@ -488,7 +499,7 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 ------------ | ------------- | ------------- | -------------
 Controller | singular | ArticleController | ~~ArticlesController~~
 Route | plural | articles/1 | ~~article/1~~
-Named route | snake_case with dot notation | users.show_active | ~~users.show-active, show-active-users~~
+Route name | snake_case with dot notation | users.show_active | ~~users.show-active, show-active-users~~
 Model | singular | User | ~~Users~~
 hasOne or belongsTo relationship | singular | articleComment | ~~articleComments, article_comment~~
 All other relationships | plural | articleComments | ~~articleComment, article_comments~~
@@ -511,9 +522,12 @@ Config | snake_case | google_calendar.php | ~~googleCalendar.php, google-calenda
 Contract (interface) | adjective or noun | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | adjective | Notifiable | ~~NotificationTrait~~
 Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
-Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
+Enum | singular | UserType | ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Seeder | singular | UserSeeder | ~~UsersSeeder~~
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">14</p>
 ### **<p dir="rtl">جہاں ممکن ہو مختصر اور زیادہ پڑھنے کے قابل syntax کا استعمال کریں۔</p>**
 
@@ -553,6 +567,7 @@ $request->name;
 `->first()->name` | `->value('name')`
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">15</p>
 ### **<p dir="rtl">نئی Class کے بجائے IoC کنٹینر یا facades استعمال کریں۔</p>**
 
@@ -573,12 +588,13 @@ public function __construct(User $user)
     $this->user = $user;
 }
 
-....
+...
 
 $this->user->create($request->validated());
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">16</p>
 ### **<p dir="rtl">`.env` فائل سے غلطہ راست ڈیٹا حاصل نہ کریں۔</p>**
 
@@ -601,6 +617,7 @@ $apiKey = config('api.key');
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">17</p>
 ### **<p dir="rtl">تاریخوں کو معیاری شکل میں محفوظ کریں۔ ڈیٹ فارمیٹ میں ترمیم کرنے کے لیے accessors اور mutators کا استعمال کریں۔</p>**
 
@@ -615,7 +632,10 @@ $apiKey = config('api.key');
 
 ```php
 // Model
-protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+protected $casts = [
+    'ordered_at' => 'datetime',
+];
+
 public function getSomeDateAttribute($date)
 {
     return $date->format('m-d');
@@ -627,6 +647,7 @@ public function getSomeDateAttribute($date)
 ```
 
 [<p dir="rtl">🔝 انڈیکس پر واپس جائیں</p>](#انڈیکس)
+
 ### <p dir="rtl">18</p>
 ### **<p dir="rtl">دوسرے اچھے طریقے۔</p>**
 

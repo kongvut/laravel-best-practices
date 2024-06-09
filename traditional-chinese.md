@@ -49,7 +49,7 @@ You might also want to check out the [real-world Laravel example application](ht
 例如:
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     if (auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified()) {
         return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
@@ -62,22 +62,22 @@ public function getFullNameAttribute()
 Good:
 
 ```php
-public function getFullNameAttribute()
+public function getFullNameAttribute(): string
 {
     return $this->isVerifiedClient() ? $this->getFullNameLong() : $this->getFullNameShort();
 }
 
-public function isVerifiedClient()
+public function isVerifiedClient(): bool
 {
     return auth()->user() && auth()->user()->hasRole('client') && auth()->user()->isVerified();
 }
 
-public function getFullNameLong()
+public function getFullNameLong(): string
 {
     return 'Mr. ' . $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
 }
 
-public function getFullNameShort()
+public function getFullNameShort(): string
 {
     return $this->first_name[0] . '. ' . $this->last_name;
 }
@@ -142,7 +142,7 @@ public function store(Request $request)
         'publish_at' => 'nullable|date',
     ]);
 
-    ....
+    ...
 }
 ```
 
@@ -151,7 +151,7 @@ Good:
 ```php
 public function store(PostRequest $request)
 {
-    ....
+    ...
 }
 
 class PostRequest extends Request
@@ -182,7 +182,7 @@ public function store(Request $request)
         $request->file('image')->move(public_path('images') . 'temp');
     }
 
-    ....
+    ...
 }
 ```
 
@@ -193,7 +193,7 @@ public function store(Request $request)
 {
     $this->articleService->handleUploadedImage($request->file('image'));
 
-    ....
+    ...
 }
 
 class ArticleService
@@ -290,6 +290,7 @@ $article = new Article;
 $article->title = $request->title;
 $article->content = $request->content;
 $article->verified = $request->verified;
+
 // Add category to article
 $article->category_id = $category->id;
 $article->save();
@@ -307,7 +308,7 @@ $category->article()->create($request->validated());
 
 例子 (若有 100 個使用者，則會執行 101 次 DB 查詢):
 
-```php
+```blade
 @foreach (User::all() as $user)
     {{ $user->profile->name }}
 @endforeach
@@ -317,8 +318,6 @@ $category->article()->create($request->validated());
 
 ```php
 $users = User::with('profile')->get();
-
-...
 
 @foreach ($users as $user)
     {{ $user->profile->name }}
@@ -354,7 +353,7 @@ if ($this->hasJoins())
 
 Bad:
 
-```php
+```javascript
 let article = `{{ json_encode($article) }}`;
 ```
 
@@ -435,7 +434,7 @@ API 登入驗證 | Laravel Passport, Laravel Sanctum | 第三方 JWT 或 OAuth �
 
 ### **遵循 Laravel 命名規範**
 
-遵守 [PSR 標準 (英語)](http://www.php-fig.org/psr/psr-2/)。
+遵守 [PSR 標準 (英語)](https://www.php-fig.org/psr/psr-12/)。
 
 另外，請遵守 Laravel 社群認可的命名規範:
 
@@ -443,7 +442,7 @@ API 登入驗證 | Laravel Passport, Laravel Sanctum | 第三方 JWT 或 OAuth �
 ------------ | ------------- | ------------- | -------------
 Controller | 單數 | ArticleController | ~~ArticlesController~~
 Route - 路由 | 複數 | articles/1 | ~~article/1~~
-Named Route - 路由命名| 使用點標記的 snake_case | users.show_active | ~~users.show-active, show-active-users~~
+Route name - 路由命名| 使用點標記的 snake_case | users.show_active | ~~users.show-active, show-active-users~~
 Model | 單數 | User | ~~Users~~
 hasOne 或 belongsTo 關聯 | 單數 | articleComment | ~~articleComments, article_comment~~
 所有其他關聯 | 複數 | articleComments | ~~articleComment, article_comments~~
@@ -466,8 +465,9 @@ View | kebab-case | show-filtered.blade.php | ~~showFiltered.blade.php, show_fil
 Contract (界面) | 形容詞或名詞 | AuthenticationInterface | ~~Authenticatable, IAuthentication~~
 Trait | 形容詞 | Notifiable | ~~NotificationTrait~~
 Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective | NotifiableTrait | ~~Notification~~
-Enum | singular | UserType |  ~~UserTypes~~, ~~UserTypeEnum~~
-FormRequest | singular | UpdateUserRequest |  ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Enum | singular | UserType | ~~UserTypes~~, ~~UserTypeEnum~~
+FormRequest | singular | UpdateUserRequest | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~
+Seeder | singular | UserSeeder | ~~UsersSeeder~~
 
 [🔝 回到目錄](#內容)
 
@@ -529,7 +529,7 @@ public function __construct(User $user)
     $this->user = $user;
 }
 
-....
+...
 
 $this->user->create($request->validated());
 ```
@@ -571,7 +571,10 @@ Good:
 
 ```php
 // Model
-protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+protected $casts = [
+    'ordered_at' => 'datetime',
+];
+
 public function getSomeDateAttribute($date)
 {
     return $date->format('m-d');
