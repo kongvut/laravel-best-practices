@@ -50,7 +50,7 @@ Translations:
 
 [اردو](urdu.md) (by [RizwanAshraf1](https://github.com/RizwanAshraf1))
 
-[မြန်မာဘာသာ](burmese.md) (by[Kaung Zay Yan](https://github.com/KaungZayY))
+[မြန်မာဘာသာ](burmese.md) (by [Kaung Zay Yan](https://github.com/KaungZayY))
 
 [![Laravel example app](/images/laravel-real-world-banner.png?raw=true)](https://github.com/alexeymezenin/laravel-realworld-example-app)
 
@@ -680,10 +680,7 @@ $user->create($request->validated());
 Good:
 
 ```php
-public function __construct(User $user)
-{
-    $this->user = $user;
-}
+public function __construct(protected User $user) {}
 
 ...
 
